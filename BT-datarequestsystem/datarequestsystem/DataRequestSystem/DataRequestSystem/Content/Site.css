@@ -1,0 +1,113 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+.nav li {
+}
+
+.container {
+    margin: auto;
+    padding: 0;
+}
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    /*max-width: 70%;*/
+}
+
+#shakeme:hover {
+    animation: shake .2s;
+    animation-iteration-count: infinite;
+}
+
+@keyframes shake {
+    0% {
+        transform: translate(1px, 1px) rotate(0deg);
+    }
+
+    10% {
+        transform: translate(-1px, -2px) rotate(-2deg);
+    }
+
+    20% {
+        transform: translate(-3px, 0px) rotate(2deg);
+    }
+
+    30% {
+        transform: translate(3px, 2px) rotate(0deg);
+    }
+
+    40% {
+        transform: translate(1px, -1px) rotate(2deg);
+    }
+
+    50% {
+        transform: translate(-1px, 2px) rotate(-2deg);
+    }
+
+    60% {
+        transform: translate(-3px, 1px) rotate(0deg);
+    }
+
+    70% {
+        transform: translate(3px, 1px) rotate(-2deg);
+    }
+
+    80% {
+        transform: translate(-1px, -1px) rotate(2deg);
+    }
+
+    90% {
+        transform: translate(1px, 2px) rotate(0deg);
+    }
+
+    100% {
+        transform: translate(1px, -2px) rotate(-2deg);
+    }
+}
+
+.modal-content {
+    text-align: center;
+    padding: 20px;
+    background: #13a9e1;
+}
+
+.modal-content h3 {
+    color: white;
+}
+#successOk, #successOk2 {
+    background-color: #ffa933;
+}
+.modal-dialog {
+    padding-top: 20%;
+}
+
+.modal-body {
+    padding: 0;
+}
+
+.modal-footer {
+    display: flex;
+    justify-content: center;
+    padding: 0;
+    padding-bottom: 10px;
+    border-top: none;
+}
+.modal.in .modal-dialog, .modal.out .modal-dialog {
+    width: fit-content;
+}

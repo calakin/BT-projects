@@ -1,0 +1,137 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@{
+    ViewBag.Title = "AddSuggestion";
+}
+﻿@section scripts {
+    @Scripts.Render("~/bundles/app")
+}
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Suggestion Page</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="~/Scripts/tags-input.js"></script>
+    <link rel="stylesheet" type="text/css" href="~/Content/tags-input.css">
+</head>
+
+<body class="main">
+    <!-- START: NAVIGATION BAR -->
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
+                        aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <img src="~/Content/images/bt_image.png" id="bt-image">
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a class="page-title">OLLERT</a>
+                    </li>
+                    <li>
+                        <a class="page-title">Suggestion Box</a>
+                    </li>
+                    <li>
+                        <a href="/Home/Index">Dashboard</a>
+                        <span class="sr-only">(current)</span>
+                    </li>
+                    <li>
+                        <a href="/Home/AddSuggestion">Add a Suggestion</a>
+                        <span class="sr-only">(current)</span>
+                    </li>
+                    <li>
+                        <a href="/Home/AdminPage">Admin</a>
+                        <span class="sr-only">(current)</span>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+    <!-- START: NAVIGATION BAR -->
+    <!--Card Submitted (hidden by default)-->
+    <div class="col-md-8" id="cardSubmitted">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h2 class="panel-title">Thank you!</h2>
+            </div>
+            <div class="panel-body">
+                <button onclick="window.location.reload()" class="btn btn-default">New Suggestion</button>
+            </div>
+        </div>
+    </div>
+
+
+    <!--Add Card Form-->
+    <div class="col-md-8" id="addCardForm">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h2 class="panel-title">Add Card/Ticket</h2>
+            </div>
+
+            <div class="panel-body">
+                <form class="form-horizontal" data-bind="submit: addCard">
+
+                    <div class="form-group" data-bind="with: newCard">
+
+                        <div class="col-sm-10">
+                            <label for="inputSuggestor" class="col-sm-2 control-label">I am a ...</label>
+                            <select onchange="hideInputs(value)" id="inputSuggestor" data-bind="options: suggestorList, value:Suggestor"></select>
+                        </div>
+
+                        <div class="col-sm-10">
+                            <label for="inputSuggestion" class="col-sm-2 control-label">Suggestion</label>
+                            <textarea name="suggestionTextBox" maxlength="1000" rows="1" cols="50" id="inputSuggestion" data-bind="value:Suggestion"></textarea>
+                        </div>
+
+
+
+                        <div class="hideFromBuilders">
+
+                            <div class="col-sm-10" id="departmentRow">
+                                <label for="inputDepartment" class="col-sm-2 control-label">Department</label>
+                                <select id="inputDepartment" data-bind="options: departmentList, value:Department"></select>
+                            </div>
+
+                            <div class="col-sm-10" id="teamRow">
+                                <label for="inputTeam" class="col-sm-2 control-label">Team</label>
+                                <select id="inputTeam" data-bind="options: teamList, value:Team"></select>
+                            </div>
+
+                            <div class="col-sm-10" id="stageRow">
+                                <label for="inputStage" class="col-sm-2 control-label">Stage</label>
+                                <select id="inputStage" data-bind="options: stageList, value:Stage"></select>
+                            </div>
+
+                            <div class="col-sm-10" id="priorityRow">
+                                <label for="inputPriority" class="col-sm-2 control-label">Priority</label>
+                                <select id="inputPriority" data-bind="options: priorityList, value:Priority"></select>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div id="emptySuggestionWarning">
+                        <p>Please make sure the "Suggestion" field is not left blank.</p>
+                    </div>
+
+                    <button onclick="validate()" id="validSubmit" type="submit" class="btn btn-default">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!--End Form-->
+</body>
+

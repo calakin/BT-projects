@@ -1,0 +1,387 @@
+﻿<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Suggestion Page</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <script src="~/Scripts/tags-input.js"></script>
+    <link rel="stylesheet" type="text/css" href="~/Content/tags-input.css">
+</head>
+
+<body class="main" style="margin-top: 20px;">
+    <!--I had to add this inline margin so the two page's navbars would match up. -Charlie -->
+    <!-- START: NAVIGATION BAR -->
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header party">
+                <img src="~/Content/images/bt_image.png" id="bt-image">
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a class="page-title">OLLERT</a>
+                    </li>
+                    <li>
+                        <a class="page-title">Suggestion Box</a>
+                    </li>
+                    <li>
+                        <a href="/Home/Index">Dashboard</a>
+                        <span class="sr-only">(current)</span>
+                    </li>
+                    <li>
+                        <a href="/Home/AddSuggestion">Add a Suggestion</a>
+                        <span class="sr-only">(current)</span>
+                    </li>
+                    <li>
+                        <a href="/Home/AdminPage">Admin</a>
+                        <span class="sr-only">(current)</span>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+    <!-- END: NAVIGATION BAR -->
+
+    <div class="container-fluid">
+        <div class="row">
+            <!-- START: TEAM/DEPARTMENT FILTERING BAR -->
+            <div class="col-lg-2">
+                <div class="well" id="side-bar">
+                    <!--data-bind="foreach: teams-->
+                    <!-- TODO: When Team elements are finished, add data-bind to update teamFilter, departmentFilter -->
+                    <!-- data-bind="setObservableOnClick: filters.teamFilter, observableValue: 'Mobile'-->
+                    <ul class="list-group" data-bind="foreach: departments">
+                        <li class="list-group-item" data-bind="">
+                            <div class="page-header">
+                                <h1 id="stage-header" data-bind="setObservableOnClick: $root.filters.teamFilter, observableValue: $data, setObservableOnClick: $root.filters.departmentFilter, observableValue: $data">
+                                    <b data-bind="text: $data"></b>
+                                    <span class="badge" data-bind="text: $parent.cards().filter((card) => { return card.Department() === $data; }).length">10</span>
+                                </h1>
+                            </div>
+                            <ul class="list-unstyled sidebar-suggestion" data-bind="foreach: $parent.team">
+                                <li class="sidebar-list-item">
+                                    <span data-bind="text: $data"></span>
+                                    <span class="badge" data-bind="text: $parentContext.$parent.cards().filter((card) => { return card.Team() === $data && card.Department() === $parent; }).length"></span>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                    <ul class="list-group">
+                        <li class="list-group-item" data-bind="click: function() { $root.filters.departmentFilter(null); }">
+                            <div class="page-header">
+                                <h1 id="stage-header">Clear</h1>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!-- END: TEAM/DEPARTMENT FILTERING SIDEBAR -->
+            <!-- START: MAIN PAGE CONTAINER -->
+            <div class="col-lg-10">
+                <!-- START: STAGE FILTERING BAR -->
+                <div class="stageBar">
+                    <ul class="nav nav-pills" data-bind="foreach: stageList">
+                        <li class="stageFilter" role="presentation" data-bind="setObservableOnClick: $root.filters.stageFilter, observableValue: $data">
+                            <a href="" class="filter-cards" data-bind="text: $data, click: function() { $(this).toggleClass('active'); }"></a>
+                        </li>
+                    </ul>
+
+                    <a href="#" class="filter-cards" data-bind="click: function() { filters.stageFilter(null); }">Clear Stage</a>
+                </div>
+                <!-- END: STAGE FILTERING BAR -->
+
+                <div class="well">
+
+                    <!-- START: SEARCH BAR -->
+                    <div class="row searchBar">
+                        <div class="col-lg-9">
+
+                            <button class="btn btn-default" type="button" data-bind="click: function() { $root.filters.suggestorFilter(null); $root.filters.departmentFilter(null); $root.filters.complexityFilter(null); $root.filters.priorityFilter(null);}">
+                                <span class="glyphicon glyphicon-refresh" aria-hidden="true"></span>
+                            </button>
+
+                            <div class="btn-group" role="group">
+                                <button class="btn btn-default dropdown-toggle" type="button" id="sortBy" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                    Sort By
+                                    <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="sortBy">
+                                    <li data-bind="click:function(){criteriaSort('stage')}"><a href="#">Stage</a></li>
+                                    <li data-bind="click:function(){criteriaSort('complexity')}"><a href="#">Complexity</a></li>
+                                    <li data-bind="click:function(){criteriaSort('priority')}"><a href="#">Priority</a></li>
+                                    <li data-bind="click:function(){criteriaSort('oldest')}"><a href="#">Oldest</a></li>
+                                    <li data-bind="click:function(){criteriaSort('newest')}"><a href="#">Newest</a></li>
+                                    <li data-bind="click:function(){criteriaSort('random')}"><a href="#">Random</a></li>
+                                </ul>
+                            </div>
+                            <!---->
+                            <select type="button" class="btn btn-default dropdown-toggle" data-bind='options:suggestorList, value: $root.filters.suggestorFilter, optionsCaption:"Filter Suggestor"'></select>
+                            <select type="button" class="btn btn-default dropdown-toggle" data-bind='options:departmentList, value: $root.filters.departmentFilter, optionsCaption:"Filter Dept"'></select>
+                            <select type="button" class="btn btn-default dropdown-toggle" data-bind='options:complexityList, value: $root.filters.complexityFilter, optionsCaption:"Filter Complexity"'></select>
+                            <select type="button" class="btn btn-default dropdown-toggle" data-bind='options:priorityList, value: $root.filters.priorityFilter, optionsCaption:"Filter Priority"'></select>
+                            <!---->
+                            <!--Colorize Cards-->
+                            <div class="btn-group row color-slider">
+                                <div class="col-sm-6">
+                                    <p style="font-size = 1.1em">Colorize</p>
+                                </div>
+                                <div class="col-sm-6">
+                                    <label class="switch">
+                                        <input id="colorize" type="checkbox">
+                                        <span class="slider round"></span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-lg-3">
+                            <form class="navbar-form navbar-right">
+                                <div class="form-group">
+                                    <fieldset>
+                                        <input type="tags" placeholder="Filter By Tags (No '#')" class="form-control" data-bind="textInput: filters.textFilter" />
+                                    </fieldset>
+                                    <!-- <input type="text" class="form-control" placeholder="Filter By Tags" data-bind="textInput: filters.textFilter">-->
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <!-- END: SEARCH BAR -->
+                    <!-- START: CARD HOLDER -->
+                    <div class="card-holder">
+                        <!-- START: CARD -->
+                        <ul class="list-unstyled connectedSortable" data-bind="foreach: cards" id="sortable-cards">
+                            <li data-bind="if: !($data.Deleted()), if: function(){$root.matchesFilter($data);}" id="card-item">
+                                <div id="card-default" class="card-body" data-bind="attr: {class: Priority() == 5 ? 'card-priority5' : (Priority() == 4 ? 'card-priority4' : (Priority() == 3 ? 'card-priority3' : (Priority() == 2 ? 'card-priority2' : 'card-priority1')))}">
+                                    <!-- START: CARD PROPERTIES -->
+                                    <div id="card-title" class="panel-heading" data-bind="text: Suggestor()"></div>
+                                    <div class="panel-body">
+                                        <p class="card-text">
+                                            <strong>Card Number: </strong><span data-bind="text:$data.Id() + ','"></span>
+                                            <strong>DateAdded: </strong><span data-bind="text: $data.DateAdded() + ','"></span>
+                                            <strong>Suggestion: </strong><span data-bind="text: $data.Suggestion()"></span>
+                                            <!--<strong>Suggestor: </strong><span data-bind="text: $data.Suggestor()"></span>
+                                            <strong>Department: </strong><span data-bind="text: $data.Department()"></span>
+                                            <strong>Team: </strong><span data-bind="text: $data.Team()"></span>
+                                            <strong>Stage: </strong><span data-bind="text: $data.Stage()"></span>
+                                            <strong>Comment: </strong><span data-bind="text: $data.Comment()"></span>
+                                            <strong>Deleted: </strong><span data-bind="text: $data.Deleted()"></span>
+                                            <strong>Complexity: </strong><span data-bind="text: $data.Complexity()"></span>
+                                            <strong>Notes: </strong><span data-bind="text: $data.Notes()"></span>
+                                            <strong>Priority: </strong><span data-bind="text: $data.Priority()"></span>-->
+                                            <div>
+                                                <strong>Tags: </strong>
+                                                <section id="tagBoxCard" class="tagBox">
+                                                    <span class="noTagsMessage" data-bind="if: $data.Tags().length === 0">No Tags</span>
+                                                    <div data-bind="foreach: $data.Tags">
+                                                        <span class="label label-default" data-bind="text: '#' + $data"></span>
+                                                    </div>
+                                                </section>
+                                            </div>
+                                        </p>
+                                    </div>
+                                    <!-- END: CARD PROPERTIES -->
+                                    <!-- START: CARD FUNCTIONS-->
+                                    <div class="row" id="card-functions">
+                                        <div class="col-lg-6" id="team-selector">
+                                            <select data-bind="options: $root.departments, value: Department, event: { change: function(data) {$root.putCard(data)} }"></select>
+                                            <select data-bind="options: [$data.Stage()].concat(Object.keys($root.stageGraph[$data.Stage()])), value: $data.Stage, event: { change: function(data) {$root.putCard(data)} }"></select>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <button id="editCardBtn" type="button" class="btn btn-default btn-md" data-toggle="modal" data-target="#editCardModal" data-bind="click: function(){ $parent.selectedCard($data), $parent.displayComment(), resetModalPosition() }">
+                                                <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                                            </button>
+
+                                            <button type="button" class="btn btn-default btn-md" data-bind="click: $parent.deleteCard" }>
+                                                <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <!-- END: CARD FUNCTIONS -->
+                                </div>
+                            </li>
+                        </ul>
+                        <!-- END: CARD -->
+                    </div>
+                    <!-- END: CARD HOLDER -->
+                </div>
+            </div>
+            <!-- END: MAIN PAGE CONTAINER -->
+        </div>
+    </div>
+
+    <!-- START: EDIT-CARD MODAL -->
+    <div class="modal fade" id="editCardModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-admin" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Card Details</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="panel-body">
+                        <!--Modal Body-->
+
+                        <form class="form-horizontal" data-bind="submit: function() { $root.appendComment(); $root.putCard(); }">
+
+                            <div class="form-group" data-bind="with: $root.selectedCard()">
+                                <div class="row">
+                                    <!--start row-->
+                                    <div class="col col-sm-6">
+                                        <!--start column 1-->
+                                        <div id="modalAttributeBox">
+                                            <div id="modalAttributeHeader">
+                                                <p><strong>Suggestion</strong></p>
+                                            </div>
+                                            <div id="modalAttributeBody">
+                                                <span data-bind="text: $data.Suggestion()"></span>
+                                            </div>
+                                        </div>
+
+                                        <div id="modalAttributeBox">
+                                            <div id="modalAttributeHeader">
+                                                <p><strong>Suggestor</strong></p>
+                                            </div>
+                                            <div id="modalAttributeBody">
+                                                <span data-bind="text: $data.Suggestor()"></span>
+                                            </div>
+                                        </div>
+
+                                        <div id="modalAttributeBox">
+                                            <div id="modalAttributeHeader">
+                                                <p><strong>Department</strong></p>
+                                            </div>
+                                            <div id="modalAttributeBody">
+                                                <select id="inputDepartment" data-bind="options: $root.departments, value: Department"></select>
+                                            </div>
+                                        </div>
+
+                                        <div id="modalAttributeBox">
+                                            <div id="modalAttributeHeader">
+                                                <p><strong>Team</strong></p>
+                                            </div>
+                                            <div id="modalAttributeBody">
+                                                <select id="inputTeam" data-bind="options: $root.team, value: Team"></select>
+                                            </div>
+                                        </div>
+
+                                        <div id="modalAttributeBox">
+                                            <div id="modalAttributeHeader">
+                                                <p><strong>Stage</strong></p>
+                                            </div>
+                                            <div id="modalAttributeBody">
+                                                <select id="inputStage" data-bind="options: [$data.Stage()].concat(Object.keys($root.stageGraph[$data.Stage()])), value: $data.Stage"></select>
+                                            </div>
+                                        </div>
+                                    </div><!--end column 1-->
+                                    <div class="col col-sm-6">
+                                        <!--start column 2-->
+                                        <div id="modalAttributeBox">
+                                            <div id="modalAttributeHeader">
+                                                <p><strong>Complexity</strong></p>
+                                            </div>
+                                            <div id="modalAttributeBody">
+                                                <input type="number" min="1" max="10" step="any" class="form-control" id="inputComplexity" data-bind="value:Complexity" />
+                                            </div>
+                                        </div>
+
+                                        <div id="modalAttributeBox">
+                                            <div id="modalAttributeHeader">
+                                                <p><strong>Priority</strong></p>
+                                            </div>
+                                            <div id="modalAttributeBody">
+                                                <input type="number" min="1" max="5" step="any" class="form-control" id="inputPriority" data-bind="value:Priority" />
+                                            </div>
+                                        </div>
+
+                                        <div id="modalAttributeBox">
+                                            <div id="modalAttributeHeader">
+                                                <p><strong>Notes</strong></p>
+                                            </div>
+                                            <div id="modalAttributeBody">
+                                                <input type="text" step="any" class="form-control" id="inputNotes" data-bind="value:Notes" />
+                                            </div>
+                                        </div>
+
+                                        <div id="modalAttributeBox">
+                                            <div id="modalAttributeHeader">
+                                                <p><strong>Tags</strong></p>
+                                            </div>
+                                            <div id="modalAttributeBody">
+
+                                                <strong class="noTagsMessage" data-bind="if: $data.Tags().length === 0">No Tags</strong>
+                                                <span data-bind="foreach: $data.Tags">
+                                                    <span class="label label-default" data-bind="text: '#' + $data"></span>
+                                                </span>
+
+
+                                                <input type="text" data-bind="value: $root.addedTags" />
+                                                <button data-bind="click: function(){$root.addTags($data)}">Add</button>
+
+                                            </div>
+                                        </div>
+
+
+
+
+                                    </div><!--end column 2-->
+                                </div><!--end row-->
+                                <!--Submit Button-->
+                                <button id="modalSubmitBtn" type="submit" class="btn btn-default">Save & Close</button>
+
+                                <div id="modalAttributeBox">
+                                    <div id="modalAttributeHeader">
+                                        <p><strong>Comments</strong></p>
+                                    </div>
+                                    <div id="modalAttributeBody">
+                                        <!--Comments loop-->
+
+                                        <div class="panel panel-default" id="commentSection">
+                                            <p><strong>Comments</strong></p>
+                                            <section data-bind="foreach: Comment()">
+                                                <div id="commentBox" data-bind="html: $data"></div>
+                                            </section>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+
+                        <!--add a new comment-->
+
+                        <div id="modalAttributeBox">
+                            <div id="modalAttributeHeader">
+                                <p><strong>New Comment</strong></p>
+                            </div>
+                            <div id="modalAttributeBody">
+                                <p><strong>Display Name:</strong></p>
+                                <input type="text" step="any" class="form-control" id="inputDisplayName" data-bind="value:displayName" />
+                                <p><strong>Comment:</strong></p>
+
+                                <textarea type="text" maxlength="256" class="form-control" id="inputNewComment" data-bind="value:newComment"></textarea>
+
+                            </div>
+                        </div>
+
+
+
+
+
+                        <!--end commenting-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- END: EDIT-CARD MODAL -->
+</body>
+</html>
+
+﻿@section scripts {
+    @Scripts.Render("~/bundles/app")
+}

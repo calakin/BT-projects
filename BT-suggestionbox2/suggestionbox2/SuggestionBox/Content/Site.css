@@ -1,0 +1,571 @@
+﻿body {
+    background-color: #13a9e1;
+}
+
+.container {
+    max-width: inherit;
+}
+
+.page-title {
+    font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+    font-size: 2.5em;
+}
+
+#stage-header {
+    font-size: 1.4em;
+    margin: 0px;
+}
+
+#bt-image {
+    width: 76px;
+}
+
+#sidebar {
+    margin-bottom: 10px;
+}
+
+.card-holder > ul {
+    display: flex;
+    flex-wrap: wrap;
+    flex-grow: 2;
+}
+
+.card-text {
+    min-height: 20px;
+}
+
+#card-title {
+    color: #333;
+    background-color: lightblue;
+    border-color: cornflowerblue;
+    width: 136px;
+    border-top-left-radius: 12px;
+}
+
+[class^="card-priority"] {
+    border-color: #ddd;
+    background-color: #098AB9;
+    max-width: 359px;
+    margin: 7px;
+    border-radius: 17px;
+    cursor: -webkit-grab;
+    cursor: grab;
+    transition: transform .2s; /* Animation */
+}
+
+.card-priority5 {
+    background-color: #D64E39;
+}
+
+    .card-priority5:hover {
+        animation: shake 0.5s;
+        animation-iteration-count: 0;
+    }
+
+
+.card-priority4 {
+    background-color: #F4A555;
+}
+
+    .card-priority4:hover {
+        transform: scale(1.05); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+    }
+
+.card-priority3 {
+    background-color: #FCFC9F;
+}
+
+    .card-priority3:hover {
+        transform: scale(1.05); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+    }
+
+.card-priority2 {
+    background-color: #CFED6D;
+}
+
+    .card-priority2:hover {
+        transform: scale(1.05); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+    }
+
+.card-priority1 {
+    background-color: #6ED870;
+}
+
+    .card-priority1:hover {
+        transform: scale(1.05); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+    }
+
+
+.card-body {
+    border-color: #ddd;
+    background-color: #098AB9;
+    margin: 7px;
+    border-radius: 17px;
+    cursor: -webkit-grab;
+    cursor: grab;
+    color: white;
+}
+
+#card-body p {
+    color: white;
+    border-radius: 15px;
+    max-width: 500px;
+    max-height: 300px;
+    margin: 7px;
+    transition: transform .2s; /* Animation */
+}
+
+.card-body:hover {
+    transform: scale(1.05); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+}
+
+@keyframes shake {
+    0% {
+        transform: translate(1px, 1px) rotate(0deg);
+    }
+
+    10% {
+        transform: translate(-1px, -2px) rotate(-1deg);
+    }
+
+    20% {
+        transform: translate(-3px, 0px) rotate(1deg);
+    }
+
+    30% {
+        transform: translate(3px, 2px) rotate(0deg);
+    }
+
+    40% {
+        transform: translate(1px, -1px) rotate(1deg);
+    }
+
+    50% {
+        transform: translate(-1px, 2px) rotate(-1deg);
+    }
+
+    60% {
+        transform: translate(-3px, 1px) rotate(0deg);
+    }
+
+    70% {
+        transform: translate(3px, 1px) rotate(-1deg);
+    }
+
+    80% {
+        transform: translate(-1px, -1px) rotate(1deg);
+    }
+
+    90% {
+        transform: translate(1px, 2px) rotate(0deg);
+    }
+
+    100% {
+        transform: translate(1px, -2px) rotate(-1deg);
+    }
+}
+
+.ui-state-highlight {
+    background-color: rgba(15, 171, 255, 0.20);
+    border-radius: 17px;
+}
+
+
+.filter-cards {
+    color: white;
+}
+
+#team-selector {
+    padding: 5px;
+}
+
+#card-function-selectors {
+    padding: 5px;
+}
+
+.nav-pills > li > a, .nav-pills > li > a:hover, .nav-pills > li > a:focus {
+    color: white;
+    background-color: #098AB9;
+    margin-bottom: 2px;
+}
+
+.nav-pills > li.active > a, .nav-pills > li.active > a:hover, .nav-pills > li.active > a:focus {
+    color: white;
+    background-color: slategray;
+}
+
+.nav-pills > li > a:hover {
+    background-color: slategray;
+    color: white;
+}
+
+.nav-pills > li > a:focus {
+    background-color: slategray;
+    color: white;
+}
+
+.well .btn-group>p {
+    margin: 0;
+}
+
+.page-header {
+    padding-bottom: 5px;
+    margin: 13px 3px 7px;
+    border-bottom: 1px solid #eee;
+}
+
+.row {
+    margin-right: 0px;
+    margin-left: 0px;
+}
+
+.badge {
+    background-color: lightskyblue;
+    color: white;
+}
+
+select {
+    display: inline-block;
+    padding: 6px 12px;
+    font-size: 14px;
+    margin: 2px;
+    width: 150px;
+    font-weight: normal;
+    line-height: 1.428571429;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    cursor: pointer;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+ul.sidebar-suggestion {
+    height: 200px;
+}
+
+ul > .sidebar-list-item {
+    padding: 6px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    border-radius: 4px;
+    height: 26px;
+    overflow-wrap: break-word;
+    overflow: hidden;
+    cursor: -webkit-grab;
+    cursor: grab;
+}
+
+ul.list-group h1 {
+    cursor: pointer;
+}
+
+.searchBar > navbar-form {
+}
+
+#inputSuggestion {
+    height: 256px;
+}
+
+fieldset {
+    padding: 10px;
+    border: none;
+}
+
+label {
+    display: inline-block;
+    width: 3.5em;
+    text-align: right;
+    padding: 0 5px;
+    color: white;
+}
+
+input {
+    display: inline-block;
+    padding: 2px;
+    margin: 2px 0;
+    background: #FFF;
+    border: 1px solid #CCC;
+    width: 16em;
+    font: inherit;
+    border-radius: 2px;
+    box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
+}
+
+    input:focus, .tags-input.focus {
+        border-color: #59F;
+        outline: none;
+    }
+
+.tagBox {
+    margin: 0;
+    border: solid;
+    border-width: 1px;
+    border-color: black;
+    padding: 2px;
+    border-radius: 4px;
+    border-color: whitesmoke;
+    color: black;
+}
+
+#tagBoxCard {
+    background-color: lightblue;
+}
+
+.tagBox > div > span {
+    background-color: #098AB9;
+}
+
+#emptySuggestionWarning {
+    display: none;
+    color: red;
+}
+
+#cardSubmitted {
+    display: none;
+}
+
+.col-sm-10 {
+    padding-top: 15px;
+}
+
+#invalidSubmit {
+    visibility: hidden;
+}
+
+#validSubmit {
+    visibility: visible;
+}
+
+/*Checkbox Formatting*/
+.switch input {
+    display: none;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+    .slider:before {
+        position: absolute;
+        content: "";
+        height: 13px;
+        width: 13px;
+        left: 4px;
+        bottom: 4px;
+        background-color: gray;
+        -webkit-transition: .4s;
+        transition: .4s;
+    }
+
+input:checked + .slider {
+    background-color: #2196F3;
+}
+
+input:focus + .slider {
+    box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+    background-color: white;
+}
+
+/* Rounded sliders */
+.slider.round {
+    border-radius: 34px;
+    width: 47px;
+}
+
+    .slider.round:before {
+        border-radius: 50%;
+    }
+
+.color-slider .col-sm-6 {
+    margin-top:5px;
+}
+
+li.party {
+    background: linear-gradient(180deg, #ff0000, #ffae00, #fffc00, #0aff00, #00fff9, #0024ff, #ea00ff);
+    background-size: 1400% 1400%;
+    -webkit-animation: party .3s ease infinite;
+    animation: party .3s ease infinite;
+}
+
+@-webkit-keyframes party {
+    0% {
+        background-position: 50% 0%
+    }
+
+    50% {
+        background-position: 51% 100%
+    }
+
+    100% {
+        background-position: 50% 0%
+    }
+}
+
+@keyframes party {
+    0% {
+        background-position: 50% 0%
+    }
+
+    50% {
+        background-position: 51% 100%
+    }
+
+    100% {
+        background-position: 50% 0%
+    }
+}
+
+#commentBox{
+    padding: 10px;
+}
+
+#commentBox:nth-child(odd) {
+    background-color: #eee;
+}
+
+#commentSection {
+
+}
+
+#inputDisplayName{
+    float: left;
+}
+
+#inputNewComment {
+    height: 256px;
+    resize: none;
+}
+
+.admin-panel {
+    border-radius: 10px;
+    background-color: white;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+.admin-header {
+    background-color: lightblue;
+    border: solid;
+    border-radius: 5px;
+    border-color: black;
+    padding: 3px;
+    margin: 5px;
+    margin-bottom: 20px;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.admin-subpanel {
+    background-color: #13a9e1;
+    margin: 5px;
+    padding: 5px;
+    border: solid;
+    border-color: black;
+}
+
+.admin-list {
+    background-color: white;
+    border: solid;
+    border-color: black;
+    list-style-type: none;
+    padding: 0;
+}
+
+.admin-list-item {
+    margin: 4px;
+    background-color: lightblue;
+    border-radius: 2px;
+    padding: 4px;
+    cursor: pointer;
+}
+#inputNotes {
+    height: 128px;
+    resize: none;
+}
+
+body .modal-admin {
+    /* new custom width */
+    width: 900px;
+    margin: 20px;
+}
+
+
+#modalAttributeHeader {
+    padding: 10px;
+    color: white;
+    background-color: #13a9e1;
+    border-radius: 10px 10px 0 0;
+    font-size: 16px;
+}
+
+#modalAttributeBox {
+    margin-bottom: 15px;
+    background-color: #eee;
+    border-radius: 10px 10px 10px 10px;
+    box-shadow: 10px 10px 10px #ddd;
+    border: 1px solid white;
+}
+
+#modalAttributeBody {
+    padding: 10px;
+    background-color: #eee;
+    border-radius: 10px 10px 10px 10px;
+}
+
+body .modal-header {
+    border-radius: 20px 20px 0 0;
+    background-color: #13a9e1;
+}
+
+body .modal-title {
+    color: white;
+    font-size: 20px;
+}
+
+body .modal-content {
+    border-radius: 20px 20px 0 0;
+}
+
+body .modal-body {
+    background-color: #fff;
+}
+
+#inputPriority {
+    width: 100px;
+}
+
+#inputComplexity {
+    width: 100px;
+}
+
+#modalSubmitBtn {
+    margin-bottom: 20px;
+}
+
+#inputDepartment {
+    width: 200px;
+}
+
+#inputTeam {
+    width: 200px;
+}
+
+#inputStage {
+    width: 300px;
+}

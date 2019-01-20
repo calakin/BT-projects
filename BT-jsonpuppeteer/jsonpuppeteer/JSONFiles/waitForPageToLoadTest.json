@@ -1,0 +1,15 @@
+{
+    "CreationDate": "2018-6-25",
+    "Commands": [
+      {
+        "Command": "open",
+        "Target": "https://test.buildertrend.net/default.aspx",
+        "Value": ""
+      },
+      {
+        "Command": "waitForPageToLoad",
+        "Target": "",
+        "Value": ""
+      }
+    ]
+  }

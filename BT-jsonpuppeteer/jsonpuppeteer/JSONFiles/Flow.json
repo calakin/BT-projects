@@ -1,0 +1,95 @@
+﻿{
+  "CreationDate": "2018-7-5",
+  "Commands": [
+    {
+      "Command": "store",
+      "Target": "10",
+      "Value": "i"
+    },
+    {
+      "Command": "store",
+      "Target": "true",
+      "Value": "condition"
+    },
+    {
+      "Command": "label",
+      "Target": "start",
+      "Value": ""
+    },
+    {
+      "Command": "comment",
+      "Target": "Starting while loop. i = ${i}.",
+      "Value": ""
+    },
+    {
+      "Command": "while",
+      "Target": "${i} > 0",
+      "Value": ""
+    },
+    {
+      "Command": "if",
+      "Target": "(${i} % 2) !== 0",
+      "Value": ""
+    },
+    {
+      "Command": "comment",
+      "Target": "${i} is odd",
+      "Value": ""
+    },
+    {
+      "Command": "endif",
+      "Target": "",
+      "Value": ""
+    },
+    {
+      "Command": "storeEval",
+      "Target": "${i} - 1",
+      "Value": "i"
+    },
+    {
+      "Command": "gotoIf",
+      "Target": "${condition}",
+      "Value": "someLabel"
+    },
+    {
+      "Command": "endWhile",
+      "Target": "",
+      "Value": ""
+    },
+    {
+      "Command": "gotoLabel",
+      "Target": "end",
+      "Value": ""
+    },
+    {
+      "Command": "label",
+      "Target": "someLabel",
+      "Value": ""
+    },
+    {
+      "Command": "comment",
+      "Target": "Reached someLabel",
+      "Value": ""
+    },
+    {
+      "Command": "store",
+      "Target": "false",
+      "Value": "condition"
+    },
+    {
+      "Command": "gotoLabel",
+      "Target": "start",
+      "Value": ""
+    },
+    {
+      "Command": "label",
+      "Target": "end",
+      "Value": ""
+    },
+    {
+      "Command": "comment",
+      "Target": "end reached",
+      "Value": ""
+    }
+  ]
+}

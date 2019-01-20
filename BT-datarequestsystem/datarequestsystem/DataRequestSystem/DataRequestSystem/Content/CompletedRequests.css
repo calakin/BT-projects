@@ -1,0 +1,169 @@
+﻿.container {
+    /*margin: 0;*/
+}
+
+.container-fluid {
+    padding-top: 20px;
+}
+
+.glyphicon {
+    padding: 0;
+    margin: 0;
+    position: static;
+}
+
+.requestRow:hover {
+    background: #e8f0f8 !important;
+}
+
+
+.panel-body {
+    border: 1px solid lightgray;
+    background: #e8f0f8;
+}
+
+    .panel-body * {
+        padding-top: 4px;
+        padding-bottom: 4px;
+        padding-right: 15px;
+        padding-left: 15px;
+    }
+
+    .panel-body h4 {
+        background-color: #5bc9f1;
+        border-radius: 3px;
+        text-align: center;
+        font-weight: bold;
+    }
+
+.requestRow {
+    margin-left: 0;
+    margin-right: 0;
+    padding: 0px;
+    background-color: white;
+    max-height: 70px;
+}
+
+    .requestRow > * {
+        text-align: center;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        /*border: 1px solid lightgray;*/
+    }
+
+.request-table-headers {
+    margin: 0;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    font-weight: bold;
+    background-color: #5bc9f1;
+}
+
+    .request-table-headers > * {
+        text-align: center;
+        padding: 0px;
+        margin: 0px;
+    }
+
+.panel-body div.row *, .requestRow * {
+    overflow-wrap: break-word;
+}
+
+.panel-body div.row textarea {
+    background-color: white;
+    border-radius: 3px;
+    padding-bottom: 0;
+    min-height: 20px;
+    height: 60px;
+    max-width: 100%;
+    width: 800px;
+    resize: none;
+    overflow: auto;
+    padding: 1%;
+}
+
+.requestRow textarea {
+    background-color: inherit;
+    border: none;
+    resize: none;
+    padding: 0.25%;
+    margin-top: 0.5%;
+    margin-bottom: 0.5%;
+    max-height: 40px;
+    overflow: hidden;
+}
+
+.request-table-headers span a:visited, .request-table-headers span a:link,
+.request-table-headers span a:visited, .request-table-headers span a:link {
+    color: black;
+    text-decoration: none;
+}
+
+.dropdown-menu > * {
+    margin: 5px;
+}
+
+.dropdown-menu ul {
+    list-style-type: none;
+    padding: 0;
+    text-align: center;
+}
+
+    .dropdown-menu ul li {
+        font-weight: 100;
+    }
+
+        .dropdown-menu ul li .glyphicon {
+            padding: 0;
+            margin: 0;
+            position: static;
+        }
+
+.ticketAdder {
+    padding: 0;
+}
+
+#buttons form {
+    padding: 0;
+    margin-left: 15px;
+}
+
+#buttons button {
+    margin-left: 15px;
+}
+
+    #buttons button:nth-of-type(1) {
+        background-color: #ffd11a;
+        margin-left: 15px;
+    }
+
+    #buttons button:nth-of-type(2) {
+        background-color: #009900;
+        margin-left: 15px;
+    }
+
+    #buttons button:nth-of-type(3) {
+        background-color: #ff5c33;
+        margin-left: 15px;
+    }
+
+#buttons form input {
+    background-color: #5bc9f1;
+}
+
+.fileInfo {
+    height:48px;
+}
+
+#fileStuff {
+    padding-left: 0;
+    display: -webkit-inline-box;
+}
+#linkNames {
+    list-style-type: none;
+    display: inline-flex;
+}
+#linkNames li {
+    padding: 0;
+}
+

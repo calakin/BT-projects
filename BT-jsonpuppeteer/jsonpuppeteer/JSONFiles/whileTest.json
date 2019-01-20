@@ -1,0 +1,30 @@
+{
+    "CreationDate": "2018-6-18",
+    "Commands": [
+      {
+        "Command": "while",
+        "Target": "i==2",
+        "Value": ""
+      },
+      {
+        "Command": "waitForVisible",
+        "Target": "id=sometext1",
+        "Value": ""
+      },
+      {
+        "Command": "waitForVisible",
+        "Target": "id=sometext2",
+        "Value": ""
+      },
+      {
+        "Command": "endWhile",
+        "Target": "",
+        "Value": ""
+      },
+      {
+        "Command": "waitForVisible",
+        "Target": "id=sometext3",
+        "Value": ""
+      }
+    ]
+  }

@@ -1,0 +1,50 @@
+{
+    "CreationDate": "2018-6-25",
+    "Commands": [
+      {
+        "Command": "open",
+        "Target": "https://test.buildertrend.net/default.aspx",
+        "Value": ""
+      },
+      {
+        "Command": "click",
+        "Target": "id=ctl00_ctl00_ctl00_MasterMain_MasterMain_MasterMain_txtUserID_Textbox1",
+        "Value": ""
+      },
+      {
+        "Command": "type",
+        "Target": "id=ctl00_ctl00_ctl00_MasterMain_MasterMain_MasterMain_txtUserID_Textbox1",
+        "Value": "nichbuilder"
+      },
+      {
+        "Command": "storeValue",
+        "Target": "id=ctl00_ctl00_ctl00_MasterMain_MasterMain_MasterMain_txtUserID_Textbox1",
+        "Value": "userid"
+      },
+      {
+        "Command": "if",
+        "Target": "'${userid}' === 'nichbuilder'",
+        "Value": ""
+      },
+      {
+        "Command": "comment",
+        "Target": "This should have been reached.",
+        "Value": ""
+      },
+      {
+        "Command": "else",
+        "Target": "",
+        "Value": ""
+      },
+      {
+        "Command": "comment",
+        "Target": "This should not have been reached.",
+        "Value": ""
+      },
+      {
+        "Command": "endIf",
+        "Target": "",
+        "Value": ""
+      }
+    ]
+  }

@@ -1,0 +1,40 @@
+﻿{
+  "CreationDate": "2018-6-18",
+  "Commands": [
+    {
+      "Command": "label",
+      "Target": "start",
+      "Value": ""
+    },
+    {
+      "Command": "comment",
+      "Target": "start",
+      "Value": ""
+    },
+    {
+      "Command": "label",
+      "Target": "middle1",
+      "Value": ""
+    },
+    {
+      "Command": "comment",
+      "Target": "middle1",
+      "Value": ""
+    },
+    {
+      "Command": "label",
+      "Target": "middle2",
+      "Value": ""
+    },
+    {
+      "Command": "comment",
+      "Target": "middle2",
+      "Value": ""
+    },
+    {
+      "Command": "gotoLabel",
+      "Target": "start",
+      "Value": ""
+    }
+  ]
+}

@@ -1,0 +1,249 @@
+﻿@{
+    ViewBag.Title = "Completed Requests";
+}
+
+﻿@section scripts {
+    @Scripts.Render("~/bundles/app")
+}
+
+<head>
+    <link rel="stylesheet" type="text/css" href="../Content/CompletedRequests.css" />
+</head>
+
+<body>
+    <div class="container-fluid">
+
+        <!-- Table headers -->
+        <div class="row request-table-headers">
+            <span class="col-md-2">
+                <span class="dropdown">
+                    <a id="DateRequestedDropdown" href="#" data-toggle="dropdown" class="glyphicon glyphicon-filter dropdown-toggle"></a>
+                    <span class="dropdown-menu" aria-labelledby="DateRequestedDropdown">
+                        From: <input data-bind="value: $root.filters.dateRequested.from" type="date" /> <br />
+                        To: <input data-bind="value: $root.filters.dateRequested.to" type="date" />
+                    </span>
+                </span>
+                Date Requested
+                <a data-bind="event: {click: function(data) { $root.sort($element, data, DateRequestedComparatorA, DateRequestedComparatorD); } }" href="#">
+                    <span class="glyphicon glyphicon-sort"></span>
+                </a>
+            </span>
+
+            <span class="col-md-2">
+                <span class="dropdown">
+                    <a id="RequesterDropdown" href="#" data-toggle="dropdown" class="glyphicon glyphicon-filter dropdown-toggle"></a>
+                    <span class="dropdown-menu" aria-labelledby="RequesterDropdown">
+                        Add Requester: <input type="text" />
+                        <button data-bind="click: $root.addRequesterFilter">Add</button><br /><br />
+                        Current Filters:
+                        <ul data-bind="foreach: $root.filters.requester">
+                            <li>
+                                <span data-bind="text: $data"></span>
+                                <button data-bind="click: function() { $root.filters.requester.remove($($element).prev().text()); }" class="glyphicon glyphicon-remove"></button>
+                            </li>
+                        </ul>
+                    </span>
+                </span>
+
+                Requester
+                <a data-bind="event: {click: function(data) { $root.sort($element, data, RequesterComparatorA, RequesterComparatorD); } }" href="#">
+                    <span class="glyphicon glyphicon-sort"></span>
+                </a>
+            </span>
+
+            <span class="col-md-2">
+                <span class="dropdown">
+                    <a id="StatusDropdown" href="#" data-toggle="dropdown" class="glyphicon glyphicon-filter dropdown-toggle"></a>
+                    <span class="dropdown-menu" aria-labelledby="StatusDropdown" data-bind="foreach: $root.completeStatuses">
+                        <span data-bind="text: $data"></span>
+                        <input type="checkbox" class="dropdown-item"
+                               data-bind="event: { change: function(data) { if($element.checked) { $root.filters.status.push($data); } else { $root.filters.status.remove($data); } } }">
+                        <br />
+                    </span>
+                </span>
+                Status
+                <a data-bind="event: {click: function(data) { $root.sort($element, data, StatusComparatorA, StatusComparatorD); } }" href="#">
+                    <span class="glyphicon glyphicon-sort"></span>
+                </a>
+            </span>
+
+            <span class="col-md-3">Description</span>
+            <span class="col-md-1">Ticket</span>
+            <span class="col-md-2">File</span>
+        </div>
+        <!-- Table headers end-->
+
+        <div class="panel-group" data-bind="foreach: $root.requests">
+            <div" data-bind="if: $root.completeStatuses.indexOf($data.CompletionStatus()) !== -1 && $root.matchesFilters($data)">
+                <div class="panel panel-default requestRow panel-heading collapsed row" data-toggle="collapse" aria-expanded="false" aria-controls="collapse"
+                     data-bind="attr: {'data-target' : ('#collapse' + $data.Id) }, style: { 'background-color': $root.statusColors[$data.CompletionStatus()] }">
+
+                    <span class="col-md-2" data-bind="text: $data.DateRequested.toLocaleString().substring(0, $data.DateRequested.toLocaleString().indexOf(','))"></span>
+                    <span class="col-md-2" data-bind="text: $data.DateWanted().toLocaleString().substring(0, $data.DateWanted().toLocaleString().indexOf(','))"></span>
+                    <span class="col-md-2" data-bind="text: $data.CompletionStatus"></span>
+                    <textarea class="col-md-3" data-bind="text: $data.Description" readonly></textarea>
+                    <a class="col-md-1" data-bind="attr: {href: $data.TicketURL}, text: $data.TicketNumber"></a>
+                    <a class="col-md-2" data-bind="attr: {href: $data.FileURLs}, text: $data.FileNames"></a>
+                </div>
+
+                <!-- COLLAPSABLE INFO -->
+                <div class="collapse" data-bind="attr: { id: ('collapse' + $data.Id) }">
+                    <div class="panel-body">
+                        <h4>Requested Information</h4>
+
+                        <div class="row">
+                            <strong class="col-md-3">Date Requested:</strong>
+                            <span class="col-md-2" data-bind="text: $data.DateRequested.toLocaleString().substring(0, $data.DateRequested.toLocaleString().indexOf(','))"></span>
+                            <div class="col-md-1"></div>
+                            <strong class="col-md-3">Date Wanted By:</strong>
+                            <input class="col-md-2 panel editable" type="date" data-bind="date: $data.DateWanted" disabled>
+                        </div>
+
+                        <div class="row">
+                            <strong class="col-md-3">Requester Name:</strong>
+                            <input class="col-md-2 panel editable" data-bind="value: $data.RequesterName" disabled>
+                            <div class="col-md-1"></div>
+                            <strong class="col-md-3">Number of Requests: </strong>
+                            <input class="col-md-2 panel editable" data-bind="value: $data.NumberRequests" disabled>
+                        </div>
+
+                        <div class="row">
+                            <strong class="col-md-3">Format: </strong>
+                            <select class="col-md-2 panel editable" data-bind="value: $data.Format, options: $root.formatOptions, optionsCaption: $data.Format" disabled></select>
+                            <div class="col-md-1"></div>
+                            <strong class="col-md-3">Priority Level: </strong>
+                            <select class="col-md-2 panel editable" data-bind="value: $data.PriorityLevel, options: $root.priorities, optionsCaption: $data.PriorityLevel" disabled></select>
+                        </div>
+
+                        <div class="row">
+                            <strong class="col-md-3">Request(s): </strong>
+                            <textarea class="editable" data-bind="value: $data.Requests" disabled></textarea>
+                        </div>
+
+                        <div class="row">
+                            <strong class="col-md-3">Description: </strong>
+                            <textarea class="col-md-8 editable" data-bind="value: $data.Description" disabled></textarea>
+                        </div>
+
+                        <div class="row">
+                            <strong class="col-md-3">Number of Viewers: </strong>
+                            <input class="col-md-2 editable panel" data-bind="value: $data.NumberViewers" disabled>
+                        </div>
+
+                        <div class="row">
+                            <strong class="col-md-3">Viewers: </strong>
+                            <textarea class="col-md-8 editable" data-bind="value: $data.Viewers" disabled></textarea>
+                        </div>
+
+                        <div class="row">
+                            <strong class="col-md-3">Usage Explanation: </strong>
+                            <textarea class="col-md-8 editable" data-bind="value: $data.UsageExplanation" disabled></textarea>
+                        </div>
+
+                        <div class="row">
+                            <strong class="col-md-3">Additional Comments: </strong>
+                            <textarea class="col-md-8 editable" data-bind="value: $data.RequestComments" disabled></textarea>
+                        </div><br />
+
+                        <div class="row">
+                            <strong class="col-md-3">Requester Filters: </strong>
+                            <div class="col-md-2">
+                                <strong>Non-demo Builders: </strong>
+                                <input class="editable" data-bind="checked: $data.filterNDBuilders" type="checkbox" disabled>
+                            </div>
+
+                            <div class="col-md-2">
+                                <strong>Open Builders: </strong>
+                                <input class="editable" data-bind="checked: $data.filterOpenBuilders" type="checkbox" disabled>
+                            </div>
+
+                            <div class="col-md-2">
+                                <strong>US Builders: </strong>
+                                <input class="editable" data-bind="checked: $data.filterUSBuilders" type="checkbox" disabled>
+                            </div>
+
+                            <div class="col-md-3">
+                                <strong>Other: </strong>
+                                <input class="editable panel" data-bind="checked: $data.filterOther" type="text" disabled>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <strong class="col-md-3">Date Range: </strong>
+                            <input data-bind="date: $data.filterFromDate" class="col-md-2 panel editable" type="date" disabled />
+                            <strong class="col-md-1"> To </strong>
+                            <input data-bind="date: $data.filterToDate" class="col-md-2 panel editable" type="date" disabled />
+                        </div>
+
+                        <h4>Developer Notes</h4>
+
+                        <div class="row">
+                            <strong class="col-md-3">Data Pulled By: </strong>
+                            <input class="col-md-2 panel editable" data-bind="value: $data.DataPulledBy" disabled>
+                            <div class="col-md-1"></div>
+                            <strong class="col-md-3">Date Pulled: </strong>
+                            <input class="col-md-2 panel editable" type="date" data-bind="date: $data.DatePulled" disabled>
+                        </div>
+
+                        <div class="row">
+                            <strong class="col-md-3">File Attached: </strong>
+                            <form class="alert alert-info fileInfo">
+                                <div class="col-md-9" id="fileStuff">
+                                    <input class="span3" type="file" id="attachedFiles" style="display: none" onchange="dothis(); $('#addFile').click();" />
+                                    <input class="btn btn-info span3" id="selectFile" type="button" onclick="$('#attachedFiles').click();" value="Choose">
+                                    <input class="btn btn-info span3" id="addFile" style="display: none" type="button" data-bind="click: $root.addFile" value="Upload">
+                                    <ul class="span3" id="linkNames" data-bind="foreach: $data.LinksList">
+                                        <li><a data-bind="text: $data.Name, attr: {href: $data.URL}"></a></li>
+                                    </ul>
+                                </div>
+                            </form>
+  
+                        </div>
+
+                        <div class="row">
+                            <strong class="col-md-3">SQL Queries: </strong>
+                            <input class="col-md-2 panel editable" data-bind="value: $data.SQLQueries" disabled>
+                        </div>
+
+                        <div class="row">
+                            <strong class="col-md-3">Completion Status: </strong>
+                            <select class="col-md-2 panel editable" data-bind="value: $data.CompletionStatus, options: $root.completeStatuses, optionsCaption: $data.CompletionStatus()" disabled></select>
+                            <div class="col-md-1"></div>
+
+                            <strong class="col-md-1">Ticket: </strong>
+                            <button class="btn col-md-1" data-bind="click: $root.linkTicket">Link Ticket</button>
+                            <input placeholder="Ticket Number" type="text" class="panel editable col-md-2" id="ticketInput" disabled />
+                            <a class="col-md-1" data-bind="visible: $data.TicketNumber() !== 0 && $data.TicketURL() !== null, attr: {href: $data.TicketURL}, text: $data.TicketNumber"></a>
+                        </div>
+
+                        <div class="row">
+                            <strong class="col-md-3">Reason(s) for Incompletion, if applicable: </strong>
+                            <textarea class="col-md-8 editable" data-bind="value: $data.UncompletionReason" disabled></textarea>
+                        </div>
+
+                        <div class="row">
+                            <strong class="col-md-3">Developer Comments: </strong>
+                            <textarea class="col-md-8 editable" data-bind="value: $data.DevComments" disabled></textarea>
+                        </div>
+
+                        <div class="row" id="buttons">
+                            <button class="btn col-md-1" id="editor" data-bind="click: $root.edit">Edit</button>
+                            <button class="btn col-md-1" id="saveEdits" data-bind="click: $root.saveEdit">Save</button>
+
+                            <div class="col-md-7"></div>
+
+                            <form col-md-1>
+                                <input class="btn" data-bind="click: $root.reopenRequest" , value="Reopen">
+                            </form>
+                        </div>
+
+                    </div>
+
+                </div>
+                <!-- COLLAPSIBLE INFO END -->
+            </div">
+
+
+        </div>
+    </div>
+</body>

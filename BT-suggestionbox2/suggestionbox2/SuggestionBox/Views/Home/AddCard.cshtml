@@ -1,0 +1,39 @@
+﻿<body>
+    <div class="container-fluid">
+
+        <div class="row">
+            <div class="col-sm-6">
+                Your Name:
+                <br />
+                <input type="text" data-bind="textInput: suggestor" />
+                <br />
+            </div>
+            <div class="col-sm-6">
+                Who Are You?
+                <br />
+                <input type="radio" id="choice1"
+                       name="role" value="customer">
+                <label for="contactChoice1">Customer</label>
+
+                <input type="radio" id="choice2"
+                       name="role" value="employee">
+                <label for="contactChoice2">Employee</label>
+            </div>
+        </div>
+
+
+        Suggestion:
+        <br />
+        <input type="text" data-bind="textInput: suggestion" />
+        <br />
+
+        <button data-bind="click: addCard">Submit</button>
+    </div>
+
+    <script src="../../Scripts/jquery-1.10.2.min.js"></script>
+    <script src="../../Scripts/bootstrap.min.js"></script>
+    <script src="../../Scripts/knockout-3.4.2.js"></script>
+    <script src="../../Scripts/knockout-3.4.2.debug.js"></script>
+
+    <script src="../../Scripts/AddCardViewModel.js"></script>
+</body>

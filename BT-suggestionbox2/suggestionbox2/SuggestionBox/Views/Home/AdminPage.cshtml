@@ -1,0 +1,148 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@{
+    ViewBag.Title = "Admin";
+}
+﻿@section scripts {
+    @Scripts.Render("~/bundles/app")
+}
+
+<head>
+    <script src="~/Scripts/tags-input.js"></script>
+    <link rel="stylesheet" type="text/css" href="~/Content/tags-input.css">
+</head>
+
+<body class="main">
+    <!-- START: NAVIGATION BAR -->
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
+                        aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <img src="~/Content/images/bt_image.png" id="bt-image">
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a class="page-title">OLLERT</a>
+                    </li>
+                    <li>
+                        <a class="page-title">Suggestion Box</a>
+                    </li>
+                    <li>
+                        <a href="/Home/Index">Dashboard</a>
+                        <span class="sr-only">(current)</span>
+                    </li>
+                    <li>
+                        <a href="/Home/AddSuggestion">Add a Suggestion</a>
+                        <span class="sr-only">(current)</span>
+                    </li>
+                    <li>
+                        <a href="/Home/AdminPage">Admin</a>
+                        <span class="sr-only">(current)</span>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container-fluid -->
+    </nav>
+    <!-- START: NAVIGATION BAR -->
+
+    <div class="admin-panel container-fluid">
+        <span class="admin-header">Card Administration</span><br />
+    </div>
+
+    <!-- START: DEPT/TEAM PANEL -->
+    <div class="admin-panel container-fluid">
+        <span class="admin-header">Department / Team Administration</span><br />
+
+        <div class="row">
+            <div class="col-lg-3 admin-subpanel">
+                <span class="admin-subheader">Stages</span><br />
+                <ul class="admin-list" data-bind="foreach: $root.departments">
+                    <li class="admin-list-item" data-bind="text: $data, click: function() { $root.selectedDepartment($data); }"></li>
+                </ul>
+
+                <input placeholder="Add a stage..." type="text" data-bind="value: $root.newStage" />
+                <button data-bind="click: addStage">Add Stage</button>
+                <button data-bind="click: removeStage">Remove</button>
+            </div>
+
+            <section data-bind="if: $root.selectedDepartment() !== undefined">
+                <div class="col-lg-3 admin-subpanel">
+                    <span class="admin-subheader">Stages</span><br />
+                    <ul class="admin-list" data-bind="foreach: $root.team">
+                        <li class="admin-list-item" data-bind="text: $data, click: function() { $root.selectedTeam($data); }"></li>
+                    </ul>
+
+                    <input placeholder="Add a stage..." type="text" data-bind="value: $root.newStage" />
+                    <button data-bind="click: addStage">Add Stage</button>
+                    <button data-bind="click: removeStage">Remove</button>
+                </div>
+            </section>
+        </div>
+    </div>
+    <!-- END: DEPT/TEAM PANEL -->
+    <!-- START: STAGE PANEL -->
+    <div class="admin-panel container-fluid">
+        <span class="admin-header">Stage Administration</span><br />
+
+        <div class="row">
+            <div class="col-lg-3 admin-subpanel">
+                <span class="admin-subheader">Stages</span><br />
+                <ul class="admin-list" data-bind="foreach: $root.stage">
+                    <li class="admin-list-item" data-bind="text: $data, click: function() { $root.selectedStage($data); }"></li>
+                </ul>
+
+                <input placeholder="Add a stage..." type="text" data-bind="value: $root.newStage" />
+                <button data-bind="click: addStage">Add Stage</button>
+                <button data-bind="click: removeStage">Remove</button>
+            </div>
+
+            <section data-bind="if: $root.selectedStage() !== undefined">
+                <div class="col-lg-3 admin-subpanel">
+                    <span class="admin-subheader">Paths</span><br />
+                    <ul class="admin-list" data-bind="visible: Object.keys($root.stageGraph[$root.selectedStage()]).length > 0, foreach: Object.keys($root.stageGraph[$root.selectedStage()])">
+                        <li class="admin-list-item" data-bind="text: $data"></li>
+                    </ul>
+
+                    <input placeholder="Add a path..." type="text" data-bind="value: $root.newPath" />
+                    <button data-bind="click: addStagePath">Add Path</button>
+                    <button data-bind="click: removeStagePath">Remove</button>
+                </div>
+            </section>
+
+            <section data-bind="if: $root.selectedStage() !== undefined">
+                <div class="col-lg-3 admin-subpanel">
+
+                    <div class="row">
+                        <span class="admin-subheader col-lg-4">Card Properties</span>
+                        <span class="col-lg-4"></span>
+                        <span class="admin-subheader col-lg-4">Edit Permission</span>
+                    </div>
+                    <div class="row">
+                        <ul class="admin-list" data-bind="foreach: $root.properties">
+                            <li class="row admin-list-item">
+                                <span class="col-lg-4" data-bind="text: $data"></span>
+                                <span class="col-lg-5"></span>
+                                <input type="checkbox" class="col-lg-3" />
+                            </li>
+
+                        </ul>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+    <!-- END: STAGE PANEL -->
+</body>
